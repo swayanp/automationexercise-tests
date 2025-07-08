@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-                git credentialsId: 'github-creds', url: 'https://github.com/swayanp/automationexercise-tests.git'
+                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/swayanp/automationexercise-tests.git'
             }
         }
 
