@@ -19,7 +19,8 @@ pipeline {
                 sh '''
                     docker run --rm \
                     -v "${WORKSPACE}/reports:/app/reports" \
-                    automationexercise-tests pytest tests/ --alluredir=/app/reports
+                    automationexercise-tests \
+                    pytest tests/ --alluredir=/app/reports -v
                 '''
             }
         }
