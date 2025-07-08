@@ -14,12 +14,12 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Tests in Docker') {
             steps {
                 sh '''
                     docker run --rm \
                     -v "${WORKSPACE}/reports:/app/reports" \
-                    automationexercise-tests pytest --alluredir=/app/reports
+                    automationexercise-tests pytest tests/ --alluredir=/app/reports
                 '''
             }
         }
