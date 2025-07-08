@@ -14,13 +14,13 @@ pipeline {
             }
         }
 
-        stage('Run Tests in Docker') {
+        stage('Run Tests Inside Docker') {
             steps {
                 sh '''
                     docker run --rm \
                     -v "${WORKSPACE}/reports:/app/reports" \
                     automationexercise-tests \
-                    pytest tests/ --alluredir=/app/reports -v
+                    pytest tests/ --alluredir=/app/reports -v --capture=tee-sys
                 '''
             }
         }
@@ -28,6 +28,7 @@ pipeline {
 
     post {
         always {
+            // Publishes Allure results collected inside ${WORKSPACE}/reports
             allure includeProperties: false, jdk: '', results: [[path: 'reports']]
         }
     }
