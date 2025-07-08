@@ -14,12 +14,12 @@ pipeline {
             }
         }
 
-        stage('Run Tests in Docker') {
+        stage('Run Tests') {
             steps {
                 sh '''
                     docker run --rm \
                     -v "${WORKSPACE}/reports:/app/reports" \
-                    automationexercise-tests
+                    automationexercise-tests pytest --alluredir=/app/reports
                 '''
             }
         }
@@ -27,7 +27,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'reports/**/*.*', allowEmptyArchive: true
+            allure includeProperties: false, jdk: '', results: [[path: 'reports']]
         }
     }
 }
