@@ -38,4 +38,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Set the entry point
-# CMD ["pytest", "tests", "--alluredir=reports"]
+CMD ["pytest", "tests", "--alluredir=/app/reports"]
